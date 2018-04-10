@@ -66,9 +66,8 @@ namespace TalkHelper
                     }
                     break;
                 }
-                //将数据送入处理中心,是用委托还是接口
+                //将数据送入处理中心
                 //TransToHandler(receiveString);
-                
             }
         }
     }
