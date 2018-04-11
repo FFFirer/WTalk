@@ -15,8 +15,8 @@ namespace Entity
         public string UserId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string remoteIP = "127.0.0.1";
-        public int remotePort = 65501;
+        public string LocalIP = "127.0.0.1";
+        public int LocalPort = 65501;
         public List<User> Friends { get; set; }
 
 
@@ -30,7 +30,7 @@ namespace Entity
         {
             try
             {
-                tcpClient = new TcpClient(remoteIP, remotePort);
+                tcpClient = new TcpClient("127.0.0.1", 65500);
             }
             catch
             {
@@ -54,10 +54,10 @@ namespace Entity
 
         }
         //查询用户
-        public List<User> SearchUsesr(string userid)
-        {
+        //public List<User> SearchUsesr(string userid)
+        //{
 
-        }
+        //}
         //添加用户为好友
         public void AddUser(string userid)
         {
@@ -73,7 +73,7 @@ namespace Entity
         {
 
         }
-        //更新用户信息
+        //更新用户密码
         public void UpdatePWD(User user)
         {
 
