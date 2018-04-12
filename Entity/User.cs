@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
+using TalkHelper;
 
 namespace Entity
 {
@@ -12,6 +13,7 @@ namespace Entity
     {
         //属性
         private TcpClient tcpClient;
+        private UdpClient udpClient;
         public string UserId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -24,6 +26,9 @@ namespace Entity
         public User()
         {
             GetTcpClient();
+            ReceiveDataTcp();
+            GetUdpClient();
+            ReceiveDataUDP();
         }
 
         public void GetTcpClient()
@@ -31,6 +36,18 @@ namespace Entity
             try
             {
                 tcpClient = new TcpClient("127.0.0.1", 65500);
+            }
+            catch
+            {
+                //异常处理
+            }
+        }
+
+        public void GetUdpClient()
+        {
+            try
+            {
+                udpClient = new UdpClient("127.0.0.1", 65511);
             }
             catch
             {
@@ -84,12 +101,17 @@ namespace Entity
         //接收Tcp数据
         public void ReceiveDataTcp()
         {
-
+            if(tcpClient!=null)
+            {
+                ChatClient cc = new ChatClient(tcpClient);
+                Task TRec = new Task(() => cc.ReceiveData());
+                TRec.Start();
+            }
         }
         //接收UDP数据
         public void ReceiveDataUDP()
         {
-
+            
         }
         #endregion
     }

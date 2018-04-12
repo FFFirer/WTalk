@@ -44,5 +44,11 @@
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TalkHelper\TalkHelper.csproj">
+      <Project>{9aa23e22-7766-4887-8ba5-c403256edb4a}</Project>
+      <Name>TalkHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
