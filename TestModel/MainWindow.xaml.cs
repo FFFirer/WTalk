@@ -30,5 +30,17 @@ namespace TestModel
             ObjectSerializeTest ost = new ObjectSerializeTest();
             ost.Show();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ClientSendTest cst = new ClientSendTest();
+            cst.Show();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            DataHandleTest dht = new DataHandleTest();
+            dht.Show();
+        }
     }
 }

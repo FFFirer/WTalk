@@ -8,6 +8,8 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="对象序列化和反序列化测试" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click"/>
+        <Button Content="客户端TCP发送测试" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_1"/>
+        <Button Content="数据处理测试" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_2"/>
 
     </Grid>
 </Window>

@@ -10,25 +10,31 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TalkHelper;
 
-namespace ChatServer
+namespace TestModel
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// DataHandleTest.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DataHandleTest : Window
     {
-        public MainWindow()
+        public DataHandleTest()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnTest_Click(object sender, RoutedEventArgs e)
         {
-            MainServer mainServer = new MainServer();
-            mainServer.Show();
+            if(txtTest.Text!=null)
+            {
+                txtbShow.Text += ("\n" + DataHandle.Handle(txtTest.Text));
+            }
+            else
+            {
+                MessageBox.Show("输入测试字符串");
+            }
         }
     }
 }

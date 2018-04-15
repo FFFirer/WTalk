@@ -24,5 +24,12 @@ namespace ChatClient
         {
             InitializeComponent();
         }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            ChatWindow cw = new ChatWindow();
+            cw.Show();
+            this.Close();
+        }
     }
 }

@@ -6,53 +6,35 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using TalkHelper;
+using System.IO;
 
 namespace Entity
 {
     public class User
     {
         //属性
-        private TcpClient tcpClient;
-        private UdpClient udpClient;
+        public bool isExit = false;
+        public TcpClient tcpClient;
+        public UdpClient udpClient;
+        public BinaryReader br;
+        public BinaryWriter bw;
         public string UserId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string LocalIP = "127.0.0.1";
         public int LocalPort = 65501;
         public List<User> Friends { get; set; }
-
+        public delegate void handle(string data, User user);
 
         //方法
-        public User()
+        public User(string userid, string password, TcpClient tcpclient)
         {
-            GetTcpClient();
-            ReceiveDataTcp();
-            GetUdpClient();
-            ReceiveDataUDP();
-        }
-
-        public void GetTcpClient()
-        {
-            try
-            {
-                tcpClient = new TcpClient("127.0.0.1", 65500);
-            }
-            catch
-            {
-                //异常处理
-            }
-        }
-
-        public void GetUdpClient()
-        {
-            try
-            {
-                udpClient = new UdpClient("127.0.0.1", 65511);
-            }
-            catch
-            {
-                //异常处理
-            }
+            this.UserId = userid;
+            this.Password = password;
+            this.tcpClient = tcpclient;
+            NetworkStream ns = tcpClient.GetStream();
+            br = new BinaryReader(ns);
+            bw = new BinaryWriter(ns);
         }
         #region 用户进行的操作
         //注册
@@ -98,14 +80,36 @@ namespace Entity
         #endregion
 
         #region 通讯操作
-        //接收Tcp数据
-        public void ReceiveDataTcp()
+        //发送Tcp数据
+        public void SendMessage(string msg)
         {
-            if(tcpClient!=null)
+            try
             {
-                ChatClient cc = new ChatClient(tcpClient);
-                Task TRec = new Task(() => cc.ReceiveData());
-                TRec.Start();
+                bw.Write(msg);
+                bw.Flush();
+            }
+            catch
+            {
+                //异常处理
+            }
+        }
+        //接收Tcp数据
+        public void ReceiveDataTcp(handle h, User user)
+        {
+            while(isExit == false)
+            {
+                string receiveString = null;
+                try
+                {
+                    receiveString = br.ReadString();
+                    h(receiveString,user);
+                }
+                catch
+                {
+                    //异常处理
+                    break;
+                }
+                //数据处理
             }
         }
         //接收UDP数据
