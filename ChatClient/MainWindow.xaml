@@ -35,7 +35,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Button Content="登陆" Grid.Row="0" Grid.Column="1" Name="btnLogin" Margin="0,5,5,5" Click="btnLogin_Click"/>
-            <Button Content="注册" Grid.Row="0" Grid.Column="2" Name="btnSignUp" Margin="5,5,0,5"/>
+            <Button Content="注册" Grid.Row="0" Grid.Column="2" Name="btnSignUp" Margin="5,5,0,5" Click="btnSignUp_Click"/>
         </Grid>
     </Grid>
 </Window>

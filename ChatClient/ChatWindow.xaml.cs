@@ -22,6 +22,7 @@ namespace ChatClient
         public ChatWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private void WrapPanel_MouseMove(object sender, MouseEventArgs e)
