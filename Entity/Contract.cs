@@ -65,29 +65,61 @@ namespace Entity
     {
         public string UserName { get; set; }
         public string Password { get; set; }
+        public LoginMsg()
+        {
+
+        }
+        public LoginMsg(string username, string password)
+        {
+            this.UserName = username;
+            this.Password = password;
+        }
     }
     //注册发送的消息协议
     public class SignupMsg
     {
         public string UserName { get; set; }
         public string Password { get; set; }
+        public SignupMsg()
+        {
+
+        }
+        public SignupMsg(string username, string password)
+        {
+            this.UserName = username;
+            this.Password = password;
+        }
     }
     //查询用户的消息协议
     public class SearchUserMsg
     {
         public string keyword { get; set; }
+        public SearchUserMsg(string keyword)
+        {
+            this.keyword = keyword;
+        }
     }
     //添加用户的消息协议
     public class AddUserMsg
     {
         public string UserID { get; set; }
         public string UserName { get; set; }
+        public AddUserMsg(string userid, string username)
+        {
+            this.UserID = userid;
+            this.UserName = username;
+        }
     }
     //删除用户的消息协议
     public class RemoveUserMsg
     {
         public string UserID { get; set; }
         public string UserName { get; set; }
+        public RemoveUserMsg(string userid, string username)
+        {
+            this.UserID = userid;
+            this.UserName = UserName;
+        }
     }
     //聊天发送的消息协议
     public class TalkMsg
@@ -95,6 +127,12 @@ namespace Entity
         public string DesUserID { get; set; }  //目标用户ID
         public string SendUserID { get; set; }  //发送用户ID
         public string Msg { get; set; }
+        public TalkMsg(string desuserid, string senduserid, string msg)
+        {
+            this.DesUserID = desuserid;
+            this.SendUserID = senduserid;
+            this.Msg = msg;
+        }
     }
     ////聊天发送的消息协议-发送给客户端
     //public class TalkMsg2Client
@@ -106,6 +144,11 @@ namespace Entity
     {
         public string UserID { get; set; }
         public string Password { get; set; }
+        public UpdateMsg(string userid, string password)
+        {
+            this.UserID = userid;
+            this.Password = password;
+        }
     }
 
 }

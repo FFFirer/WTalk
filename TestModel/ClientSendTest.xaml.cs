@@ -24,14 +24,16 @@ namespace TestModel
     {
         public TcpClient tcpClient;
         public User user;
+
         public ClientSendTest()
         {
             InitializeComponent();
+            ClientDataHandle.ShowMsg += UpdateTxtb;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            tcpClient = new TcpClient("192.168.20.1", 51888);
+            tcpClient = new TcpClient("192.168.10.1", 51888);
             user = new User("", "", tcpClient);
             txtShow.Text += "用户创建成功";
         }
@@ -44,6 +46,11 @@ namespace TestModel
                 user.SendMessage(txtSend.Text);
             }
             txtSend.Clear();
+        }
+
+        public void UpdateTxtb(object sender, string msg)
+        {
+            this.txtShow.Dispatcher.Invoke(() => this.txtShow.Text += msg);
         }
     }
 }

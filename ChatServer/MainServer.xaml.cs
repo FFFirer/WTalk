@@ -24,10 +24,12 @@ namespace ChatServer
     public partial class MainServer : Window
     {
         private TcpListener listener;
-
+        public List<User> users;
+        private Task listenTask = null;
         public MainServer()
         {
             InitializeComponent();
+            DataHandle.ShowHandler += UpdateTxtb;
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
@@ -36,13 +38,16 @@ namespace ChatServer
             IPAddress ip = DataHandle.localIP;
             listener = new TcpListener(ip, port);
             listener.Start();
-            txtbMsg.Text += "开始监听。。。\n";
-
+            txtbMsg.Text += string.Format("在{0}:{1}开始监听。。。\n",ip.ToString(), port.ToString());
+            btnStart.IsEnabled = false;
+            btnStop.IsEnabled = true;
+            listenTask = new Task(() => ListenConnect());
+            listenTask.Start();
         }
         
         public void ListenConnect()
         {
-            TcpClient newClient;
+            TcpClient newClient = null;
             while(true)
             {
                 try
@@ -54,10 +59,34 @@ namespace ChatServer
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Accept:"+ex.Message);
                     return;
                 }
             }
+        }
+
+        private void btnStop_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                listener.Stop();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Stop:"+ex.Message);
+            }
+            this.txtbMsg.Dispatcher.Invoke(() => this.txtbMsg.Text += "已停止监听");
+            btnStart.IsEnabled = true;
+            btnStop.IsEnabled = false;
+            if(users!=null)
+            {
+                users.Clear();
+            }
+        }
+
+        public void UpdateTxtb(object sender, string data)
+        {
+            this.txtbMsg.Dispatcher.Invoke(() => this.txtbMsg.Text += data);
         }
     }
 }

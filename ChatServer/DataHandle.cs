@@ -8,11 +8,12 @@ using System.Net.Sockets;
 
 namespace ChatServer
 {
-    public class DataHandle
+    public static class DataHandle
     {
         public static List<User> userList { get; set; }
         public static IPAddress localIP { get; set; }
         public static int port { get; set; }
+        public static event EventHandler<string> ShowHandler;
         static DataHandle()
         {
             userList = new List<User>();
@@ -27,8 +28,43 @@ namespace ChatServer
                 }
             }
         }
-
         //业务操作
+        public static void Default(string data)
+        {
+            if(ShowHandler != null)
+            {
+                ShowHandler(null, data);
+            }
+        }
 
+        public static string Resend(string data)
+        {
+            return "CALLBACK:服务器返回消息";
+        }
+
+        //登陆
+        public static string Login(string id, string pwd)
+        {
+            if (id == "admin" && pwd == "admin")
+            {
+                return "LOGIN SUCCESS";
+            }
+            else
+            {
+                return "LOGIN FAILURE";
+            }
+        }
+
+        //注册
+        public static string Signup(string name, string pwd)
+        {
+            return "SIGNUP SUCCESS";
+        }
+
+        //登出
+        public static string Logouot(string name)
+        {
+            return name + "已登出";
+        }
     }
 }

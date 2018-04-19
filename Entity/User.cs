@@ -35,6 +35,7 @@ namespace Entity
             NetworkStream ns = tcpClient.GetStream();
             br = new BinaryReader(ns);
             bw = new BinaryWriter(ns);
+            Task.Run(() => ReceiveDataTcp());
         }
         #region 用户进行的操作
         //注册
@@ -109,7 +110,45 @@ namespace Entity
                     //异常处理
                     break;
                 }
-                //数据处理
+                string[] spilt = receiveString.Split(':');
+                switch (spilt[0])
+                {
+                    case "CALLBACK":
+                        ClientDataHandle.Default("CALLBACK:" + spilt[1]+"\n");
+                        break;
+                    default:
+                        ClientDataHandle.Default(spilt[1]+"\n");
+                        break;
+
+                }
+            }
+        }
+        //接收Tcp数据
+        public void ReceiveDataTcp()
+        {
+            while (isExit == false)
+            {
+                string receiveString = null;
+                try
+                {
+                    receiveString = br.ReadString();
+                }
+                catch
+                {
+                    //异常处理
+                    break;
+                }
+                string[] spilt = receiveString.Split(':');
+                switch (spilt[0])
+                {
+                    case "CALLBACK":
+                        ClientDataHandle.Default("CALLBACK:" + spilt[1] + "\n");
+                        break;
+                    default:
+                        ClientDataHandle.Default(spilt[1] + "\n");
+                        break;
+
+                }
             }
         }
         //接收UDP数据

@@ -8,7 +8,7 @@
         Title="MainServer" Height="450" Width="800">
     <Grid>
         <Button Name="btnStart" Content="开始监听" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="75" Click="btnStart_Click"/>
-        <Button Name="btnStop" Content="停止监听" HorizontalAlignment="Left" Margin="215,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="btnStop" Content="停止监听" IsEnabled="False" HorizontalAlignment="Left" Margin="215,10,0,0" VerticalAlignment="Top" Width="75" Click="btnStop_Click"/>
         <ListBox Name="listUser" HorizontalAlignment="Left" Height="231" Margin="10,34,0,0" VerticalAlignment="Top" Width="774" BorderThickness="2"/>
         <ScrollViewer HorizontalAlignment="Left" Height="140" Margin="10,270,0,0" VerticalAlignment="Top" Width="774" BorderThickness="2">
             <TextBlock Name="txtbMsg" TextWrapping="Wrap" Text="" Width="753"/>
