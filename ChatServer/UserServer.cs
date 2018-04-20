@@ -10,14 +10,14 @@ using Entity;
 
 namespace ChatServer
 {
-    public class User
+    public class UserServer
     {
         public BinaryReader br { get; set; }
         public BinaryWriter bw { get; set; }
         private string UserId { get; set; }
         private string UserName { get; set; }
         private TcpClient client { get; set; }
-        public User(TcpClient client)
+        public UserServer(TcpClient client)
         {
             this.client = client;
             NetworkStream ns = client.GetStream();

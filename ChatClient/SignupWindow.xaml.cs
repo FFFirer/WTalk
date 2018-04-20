@@ -16,6 +16,7 @@ using System.Net.Sockets;
 using System.IO;
 using Entity;
 using TalkHelper;
+using System.Windows.Forms;
 
 namespace ChatClient
 {
@@ -49,7 +50,7 @@ namespace ChatClient
                     }
                     if (receivestring == "SIGNUP SUCCESS")
                     {
-                        MessageBox.Show("注册成功！");
+                        DialogResult dr = MessageBox.Show("注册成功！");
                         MainWindow main = new MainWindow();
                         main.Show();
                         this.Close();

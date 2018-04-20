@@ -24,7 +24,7 @@ namespace ChatServer
     public partial class MainServer : Window
     {
         private TcpListener listener;
-        public List<User> users;
+        public List<UserServer> users;
         private Task listenTask = null;
         public MainServer()
         {
@@ -54,7 +54,7 @@ namespace ChatServer
                 {
                     newClient = listener.AcceptTcpClient();
                     this.txtbMsg.Dispatcher.Invoke(() => txtbMsg.Text += string.Format("{0}-->新客户端连接-->{1}\n", DateTime.Now.ToLongTimeString(), newClient.Client.RemoteEndPoint));
-                    User user = new User(newClient);
+                    UserServer user = new UserServer(newClient);
                     DataHandle.userList.Add(user);
                 }
                 catch(Exception ex)

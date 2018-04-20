@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Entity;
 using System.Net;
 using System.Net.Sockets;
+using TalkHelper;
 
 namespace TestModel
 {

@@ -10,13 +10,13 @@ namespace ChatServer
 {
     public static class DataHandle
     {
-        public static List<User> userList { get; set; }
+        public static List<UserServer> userList { get; set; }
         public static IPAddress localIP { get; set; }
         public static int port { get; set; }
         public static event EventHandler<string> ShowHandler;
         static DataHandle()
         {
-            userList = new List<User>();
+            userList = new List<UserServer>();
             port = 51888;
             IPAddress[] ips = Dns.GetHostAddresses(Dns.GetHostName());
             foreach(var v in ips)
